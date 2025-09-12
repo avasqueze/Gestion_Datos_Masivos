@@ -18,4 +18,3 @@ docker compose exec namenode hdfs dfs -put -f /tmp/clicks_sample.csv /data/raw/
 docker compose exec namenode hdfs dfs -ls -h /data/raw
 docker compose exec namenode hdfs dfs -du -h /data/raw
 ```
-4) Cree una tabla externa (Hive + Parquet) — opcional si agrega Hive.

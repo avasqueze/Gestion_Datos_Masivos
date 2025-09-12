@@ -9,9 +9,9 @@ Iniciemos
 
 ## Imágenes incluidas
 
--   Imagen base: Hadoop + Hive + Spark - [Base image](https://github.com/panovvv/hadoop-hive-spark-docker)
--   Imagen Zeppelin: Interfaz de cuadernos interactivos [Zeppelin image](https://github.com/panovvv/zeppelin-bigdata-docker)
--   Imagen Livy: Servidor REST para Spark - [Livy image](https://github.com/panovvv/livy-docker)
+-   Imagen base: Hadoop + Hive + Spark - [Imagen Base](https://github.com/panovvv/hadoop-hive-spark-docker)
+-   Imagen Zeppelin: Interfaz de cuadernos interactivos [Imagen Zeppelin](https://github.com/panovvv/zeppelin-bigdata-docker)
+-   Imagen Livy: Servidor REST para Spark - [Imagen Livy](https://github.com/panovvv/livy-docker)
 
 ------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ docker-compose up -d
 
 * El directorio **data/** se monta en cada contenedor. Puedes usarlo como almacenamiento tanto para los archivos que quieras procesar con Hive/Spark/u otras herramientas, como para los resultados de esos cálculos.
 
-* El directorio **livy\_batches/** contiene código de ejemplo para el modo batch de Livy. Está montado en el nodo donde se ejecuta Livy. Puedes guardar allí tu propio código, o utilizar el directorio universal **data/**.
+* El directorio **data/batches/** contiene código de ejemplo para el modo batch de Livy. Está montado en el nodo donde se ejecuta Livy. Puedes guardar allí tu propio código, o utilizar el directorio universal **data/**.
 
 * El directorio **zeppelin\_notebooks/** contiene, como era de esperar, los archivos de cuadernos de Zeppelin. Gracias a esto, todos tus notebooks persisten entre ejecuciones.
 
@@ -113,14 +113,14 @@ Name: 172.28.1.3:9866 (worker2)
 Ahora subiremos un archivo a HDFS y verificaremos que sea visible desde todos los nodos:
 
 ```bash
-hadoop fs -put /data/grades.csv /
+hadoop fs -put /data/notas.csv /
 hadoop fs -ls /
 ```
 
 <pre>
 Found N items
 ...
--rw-r--r--   2 root supergroup  ... /grades.csv
+-rw-r--r--   2 root supergroup  ... /notas.csv
 ...
 </pre>
 
@@ -156,11 +156,7 @@ jps
 
 Ejemplo de creación de tabla y carga de datos desde HDFS.
 
-Aquí está la traducción al español del texto que compartiste:
-
----
-
-**Prerrequisito:** debe existir un archivo `notas.csv` almacenado en HDFS (`hadoop fs -put /data/grades.csv /`).
+**Prerrequisito:** debe existir un archivo `notas.csv` almacenado en HDFS (`hadoop fs -put /data/notas.csv /`).
 
 ```bash
 docker-compose exec master bash
@@ -210,12 +206,12 @@ SELECT * FROM notas;
 Vuelve a bash con `Ctrl+D`. Verifica si el archivo se cargó en el directorio de Hive warehouse:
 
 ```bash
-hadoop fs -ls /usr/hive/warehouse/grades
+hadoop fs -ls /usr/hive/warehouse/notas
 ```
 
 <pre>
 Found 1 items
--rw-r--r--   2 root supergroup  ... /usr/hive/warehouse/grades/grades.csv
+-rw-r--r--   2 root supergroup  ... /usr/hive/warehouse/notas/notas.csv
 </pre>
 
 La tabla que acabamos de crear debería ser accesible desde todos los nodos. Vamos a verificarlo:
@@ -226,7 +222,7 @@ hive
 ```
 
 ```sql
-SELECT * FROM grades;
+SELECT * FROM notas;
 ```
 
 Deberías poder ver la misma tabla. ✅
@@ -304,7 +300,7 @@ Spark cuenta con 3 shells interactivos:
 Probémoslas todas:
 
 ```bash
-hadoop fs -put /data/grades.csv /
+hadoop fs -put /data/notas.csv /
 spark-shell
 ```
 
@@ -358,7 +354,7 @@ spark.sql('SHOW TABLES').show()
 spark.sql('SELECT * FROM df WHERE Final > 50').show()
 
 # TODO: SELECT TABLE desde Hive - aún no funciona.
-spark.sql('SELECT * FROM grades').show()
+spark.sql('SELECT * FROM notas').show()
 ```
 
 Salida esperada:

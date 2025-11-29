@@ -95,7 +95,3 @@ Aquí tienes un programa de **16 semanas (3 h/semana)** estructurado con los tem
   *Implementación final con arquitectura Lambda o Kappa, incorporando batch y/o streaming, documentación y defensa oral.*
 
 ---
-
-Si quieres, puedo prepararte también **un cronograma con lecturas específicas por semana de los libros recomendados**, así cada tema del programa queda vinculado a capítulos concretos y ejercicios prácticos. Así tendrías un plan de lectura guiada junto al plan de clases.
-
-¿Quieres que lo arme?

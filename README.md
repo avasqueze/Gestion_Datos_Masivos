@@ -19,9 +19,6 @@ Curso_BigData_12s/
 ├── data/                  # Datos de ejemplo (CSV/JSONL) + generadores
 └── evaluacion/            # Rúbricas y quizzes
 ```
-
-Aquí tienes un programa de **16 semanas (3 h/semana)** estructurado con los temas que indicaste, usando **Python, Spark y Hadoop** como ejes prácticos. También incluyo un libro principal reciente (post-2020) y tres auxiliares que complementan el aprendizaje.
-
 ---
 
 ## 📚 Bibliografía recomendada
